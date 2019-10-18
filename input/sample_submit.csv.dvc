@@ -1,0 +1,7 @@
+md5: 29458fe6a7e3156a7f53777f22f835ab
+outs:
+- md5: fc780e61d1c1ec3b4b172de526ee3a0a
+  path: sample_submit.csv
+  cache: true
+  metric: false
+  persist: false
