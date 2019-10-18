@@ -1,0 +1,16 @@
+md5: 25ecbb37ea684a82a452c0d9df630181
+cmd: python src/run/rfr.py
+wdir: ..
+deps:
+- md5: 9547424a42d4961f38fe00f7a4ab2691
+  path: data/example_test.csv
+- md5: e3b0286b04429bb79ada3464657db0cd
+  path: data/example_train.csv
+- md5: 6bb70d7c5d09837a6d10e0298b4b9ee2
+  path: src/run/rfr.py
+outs:
+- md5: 398bd95d55bb9670f2de4a7b64cb6ce1
+  path: output/example_01.csv
+  cache: true
+  metric: false
+  persist: false
