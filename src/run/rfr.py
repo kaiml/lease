@@ -31,7 +31,7 @@ print("RMSE:", RMSE)
 y_test = model.predict(df_test.iloc[:, :5])
 
 pd.concat([sample_submit.iloc[:, 0], pd.Series(y_test)], axis=1).to_csv(
-    "output/20191019_example.csv",
+    "output/example_01.csv",
     header=False,
     index=False,
 )
