@@ -4,16 +4,14 @@ from sklearn.metrics import mean_squared_error
 import pandas as pd
 import numpy as np
 
-df_train = pd.read_csv("data/example_train.csv")
-df_test = pd.read_csv("data/example_test.csv")
+sample_submit = pd.read_csv("input/sample_submit.csv")
+df_train = pd.read_csv("data/example_train.csv", index_col=False)
+df_test = pd.read_csv("data/example_test.csv", index_col=False)
 
 
 # Train Test Split
 X_train, X_val, y_train, y_val = train_test_split(
-    df_train[:5],
-    df_train.loc[:, "target"],
-    test_size=0.33,
-    random_state=42,
+    df_train.iloc[:, :5], df_train.loc[:, "target"], test_size=0.33, random_state=42
 )
 
 
@@ -30,10 +28,10 @@ y_pred = model.predict(X_val)
 RMSE = np.sqrt(mean_squared_error(y_val.values, y_pred))
 print("RMSE:", RMSE)
 
-y_test = model.predict(df_test)
+y_test = model.predict(df_test.iloc[:, :5])
 
-pd.concat([df_test.loc[:, "id"], pd.Series(y_test)], axis=1).to_csv(
-    "output/submission_{}.csv".format(pd.to_datetime("today").strftime("%Y-%m-%d")),
+pd.concat([sample_submit.iloc[:, 0], pd.Series(y_test)], axis=1).to_csv(
+    "output/20191019_example.csv",
     header=False,
     index=False,
 )
