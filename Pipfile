@@ -5,14 +5,24 @@ verify_ssl = true
 
 [dev-packages]
 black = "==19.3b0"
+dvc = {extras = ["gs"],version = "*"}
 flake8 = "*"
 invoke = "*"
 isort = "*"
 mypy = "*"
 pep8 = "*"
+pycodestyle = "*"
+pycodestyle-magic = "*"
 tox = "*"
 
 [packages]
+ipython = "*"
+matplotlib = "*"
+numpy = "*"
+pandas = "*"
+scikit-learn = "*"
+seaborn = "*"
+tqdm = "*"
 
 [pipenv]
 allow_prereleases = true
@@ -24,3 +34,4 @@ python_version = "3.7"
 check = "invoke check"
 format = "invoke format"
 libs = "invoke libs"
+test = "tox -p all"
