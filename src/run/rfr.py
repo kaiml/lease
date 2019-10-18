@@ -1,8 +1,8 @@
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_squared_error
-import pandas as pd
 import numpy as np
+import pandas as pd
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import mean_squared_error
+from sklearn.model_selection import train_test_split
 
 sample_submit = pd.read_csv("input/sample_submit.csv")
 df_train = pd.read_csv("data/example_train.csv", index_col=False)
@@ -31,7 +31,5 @@ print("RMSE:", RMSE)
 y_test = model.predict(df_test.iloc[:, :5])
 
 pd.concat([sample_submit.iloc[:, 0], pd.Series(y_test)], axis=1).to_csv(
-    "output/example_01.csv",
-    header=False,
-    index=False,
+    "output/example_01.csv", header=False, index=False
 )
