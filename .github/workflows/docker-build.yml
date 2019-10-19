@@ -11,4 +11,4 @@ jobs:
       - uses: actions/checkout@v1
       - name: Build the Docker image
         run: |
-          docker build . -t lease-eda:test
+          docker build . -t lease:test
