@@ -55,7 +55,7 @@ jobs:
           echo "PR-NUMBER: $PR_NUMBER" >> argo/params.yaml
           echo "REPO: $GITHUB_REPOSITORY" >> argo/params.yaml
         env:
-          SHA: ${{ steps.label.outputs.HEAD_SHA }}a
+          SHA: ${{ steps.label.outputs.HEAD_SHA }}
           PR_NUMBER: ${{ steps.label.outputs.ISSUE_NUMBER }}
 
       - name: Submit Argo Deployment
@@ -65,9 +65,9 @@ jobs:
         with:
           ARGO_URL: ${{ secrets.ARGO_URI }}
           APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
-          PROJECT_ID: ${{ secrets.GOOGLE_PROJECT_ID }}
-          LOCATION_ZONE: "us-west1-a"
-          CLUSTER_NAME: "github-actions-demo"
+          PROJECT_ID: "kaiml-argo"
+          LOCATION_ZONE: "asia-northeast1-a"
+          CLUSTER_NAME: "kaiml-argo"
           WORKFLOW_YAML_PATH: "argo/workflow.yaml" # the argo workflow file relative to the repo's root.
           PARAMETER_FILE_PATH: "argo/params.yaml" # optional parameter file.
           SHA: ${{ steps.label.outputs.HEAD_SHA }}
@@ -79,8 +79,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ARGO_LINK: ${{ steps.argo.outputs.WORKFLOW_URL }}
-          WANDB_ENTITY: ${{ secrets.WANDB_ENTITY }}
-          WANDB_PROJECT: ${{ secrets.WANDB_PROJECT }}
+          WANDB_ENTITY: "kaiml"
+          WANDB_PROJECT: "lease"
           SHA: ${{ steps.label.outputs.HEAD_SHA }}
 
       - name: Comment With Metadata
@@ -90,7 +90,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ARGO_LINK: ${{ steps.argo.outputs.WORKFLOW_URL }}
-          WANDB_ENTITY: ${{ secrets.WANDB_ENTITY }}
-          WANDB_PROJECT: ${{ secrets.WANDB_PROJECT }}
+          WANDB_ENTITY: "kaiml"
+          WANDB_PROJECT: "lease"
           ISSUE_NUMBER: ${{ steps.label.outputs.ISSUE_NUMBER }}
           SHA: ${{ steps.label.outputs.HEAD_SHA }}
