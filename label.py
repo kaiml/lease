@@ -15,7 +15,8 @@ with open(fname, "r") as f:  # type: ignore
 
 assert (
     "pull_request" in val
-), "Error: this action is designed to operate on a payload for which a root node is `pull_request`."
+), """Error: this action is designed to operate on a payload for which a
+root node is `pull_request`."""
 
 labels = val["pull_request"]["labels"]
 sha = val["pull_request"]["head"]["sha"]
