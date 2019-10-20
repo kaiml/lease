@@ -13,7 +13,7 @@ jobs:
 
       - name: Trigger on PR Label
         id: label
-        run: python label.py
+        run: python gha/validate_payload.py
         env:
           TRIGGER_LABEL_NAME: "Full Test Pending"
 
@@ -27,7 +27,6 @@ jobs:
           docker pull $BASE_NAME || true
           docker build --cache-from $BASE_NAME -t $IMAGE_NAME -t $BASE_NAME -f Dockerfile .
           docker push $IMAGE_NAME
-          docker push $BASE_NAME
         env:
           USERNAME: ${{ secrets.DOCKER_USERNAME }}
           PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
@@ -60,7 +59,7 @@ jobs:
       - name: Create Check
         if: steps.label.outputs.TRIGGERED == 'true'
         run: |
-          python3 action_files/create_check_run.py "in_progress" "Argo-Workflow" "ML Workflow For SHA $SHA" "Links [Argo Workflow]($ARGO_LINK) | [W&B Project](https://app.wandb.ai/$WANDB_ENTITY/$WANDB_PROJECT) | Docker: [hamelsmu/ml-cicd](https://cloud.docker.com/u/hamelsmu/repository/docker/hamelsmu/ml-cicd), [hamelsmu/ml-cicd-gpu](https://cloud.docker.com/u/hamelsmu/repository/docker/hamelsmu/ml-cicd-gpu)" " "
+          python3 gha/create_check_run.py "in_progress" "Argo-Workflow" "ML Workflow For SHA $SHA" "Links [Argo Workflow]($ARGO_LINK) | [W&B Project](https://app.wandb.ai/$WANDB_ENTITY/$WANDB_PROJECT) | Docker: [hamelsmu/ml-cicd](https://cloud.docker.com/u/hamelsmu/repository/docker/hamelsmu/ml-cicd), [hamelsmu/ml-cicd-gpu](https://cloud.docker.com/u/hamelsmu/repository/docker/hamelsmu/ml-cicd-gpu)" " "
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ARGO_LINK: ${{ steps.argo.outputs.WORKFLOW_URL }}
@@ -71,7 +70,7 @@ jobs:
       - name: Comment With Metadata
         if: steps.label.outputs.TRIGGERED == 'true'
         run: |
-          bash action_files/pr_comment.sh "### [ML Workflow]($ARGO_LINK) For SHA $SHA has been instantiated.\n\nThe following Docker images were built and tagged with the SHA: \n - [hamelsmu/ml-cicd](https://cloud.docker.com/u/hamelsmu/repository/docker/hamelsmu/ml-cicd)\n - [hamelsmu/ml-cicd-gpu](https://cloud.docker.com/u/hamelsmu/repository/docker/hamelsmu/ml-cicd-gpu)\n\nCheck run \`Argo-Workflow\` created, with status pending completion of the workflow."
+          bash gha/pr_comment.sh "### [ML Workflow]($ARGO_LINK) For SHA $SHA has been instantiated.\n\nThe following Docker images were built and tagged with the SHA: \n - [hamelsmu/ml-cicd](https://cloud.docker.com/u/hamelsmu/repository/docker/hamelsmu/ml-cicd)\n - [hamelsmu/ml-cicd-gpu](https://cloud.docker.com/u/hamelsmu/repository/docker/hamelsmu/ml-cicd-gpu)\n\nCheck run \`Argo-Workflow\` created, with status pending completion of the workflow."
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ARGO_LINK: ${{ steps.argo.outputs.WORKFLOW_URL }}
