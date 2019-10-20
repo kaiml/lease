@@ -1,7 +1,5 @@
 name: Demo
-on:
-  pull_request:
-    type: opened # PRs == Issues in GitHub
+on: [issue_comment]
 
 jobs:
   demo:
