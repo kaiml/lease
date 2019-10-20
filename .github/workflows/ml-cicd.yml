@@ -13,7 +13,7 @@ jobs:
 
       - name: Trigger on PR Label
         id: label
-        run: python action_files/validate_payload.py
+        run: python label.py
         env:
           TRIGGER_LABEL_NAME: "Full Test Pending"
 
