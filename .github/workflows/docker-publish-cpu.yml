@@ -12,7 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: Publish CPU Image to DockerHub
-        if: steps.label.outputs.TRIGGERED == 'true'
         run: |
           cd $GITHUB_WORKSPACE
           echo ${PASSWORD} | docker login -u $USERNAME --password-stdin
