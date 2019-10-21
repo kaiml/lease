@@ -1,3 +1,7 @@
+# References:
+# https://github.com/machine-learning-apps/actions-ml-cicd
+# /blob/master/action_files/validate_payload.py
+
 import json
 import os
 

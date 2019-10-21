@@ -2,7 +2,7 @@ name: ChatOps
 on: [issue_comment]
 
 jobs:
-  full-test-run:
+  run-full-test:
     if: github.event.issue.pull_request != null
     runs-on: ubuntu-latest
     steps:
