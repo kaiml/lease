@@ -1,4 +1,4 @@
-name: Docker Build Image
+name: Build Docker Image
 on:
   push:
     paths:
@@ -8,7 +8,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - name: Build the Docker image
+      - uses: actions/checkout@master
+      - name: Build Docker Image with DockerHub
         run: |
-          docker build . -t lease:test
+          cd $GITHUB_WORKSPACE
+          echo ${PASSWORD} | docker login -u $USERNAME --password-stdin
+          BASE_NAME="kaiml/lease"
+          IMAGE_NAME="$BASE_NAME:$GITHUB_SHA"
+          docker pull $BASE_NAME || true
+          docker build --cache-from $BASE_NAME -t $IMAGE_NAME -t $BASE_NAME -f Dockerfile .
+        env:
+          USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          PASSWORD: ${{ secrets.DOCKER_PASSWORD }
