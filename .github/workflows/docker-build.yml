@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - "Dockerfile"
+      - "Pipfile"
       - "Pipfile.lock"
 jobs:
   build:
