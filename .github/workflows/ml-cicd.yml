@@ -13,7 +13,7 @@ jobs:
 
       - name: Trigger on PR Label
         id: label
-        run: python action_files/validate_payload.py
+        run: python gha/validate_payload.py
         env:
           TRIGGER_LABEL_NAME: "Full Test Pending"
 
@@ -27,22 +27,6 @@ jobs:
           docker pull $BASE_NAME || true
           docker build --cache-from $BASE_NAME -t $IMAGE_NAME -t $BASE_NAME -f Dockerfile .
           docker push $IMAGE_NAME
-          docker push $BASE_NAME
-        env:
-          USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Publish GPU Image to DockerHub
-        if: steps.label.outputs.TRIGGERED == 'true'
-        run: |
-          cd $GITHUB_WORKSPACE
-          echo ${PASSWORD} | docker login -u $USERNAME --password-stdin
-          BASE_NAME="$USERNAME/lease-gpu"
-          IMAGE_NAME="$BASE_NAME:$GITHUB_SHA"
-          docker pull $BASE_NAME || true
-          docker build --cache-from $BASE_NAME -t $IMAGE_NAME -t $BASE_NAME -f Dockerfile .
-          docker push $IMAGE_NAME
-          docker push $BASE_NAME
         env:
           USERNAME: ${{ secrets.DOCKER_USERNAME }}
           PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
@@ -68,14 +52,14 @@ jobs:
           PROJECT_ID: "kaiml-argo"
           LOCATION_ZONE: "asia-northeast1-a"
           CLUSTER_NAME: "kaiml-argo"
-          WORKFLOW_YAML_PATH: "argo/workflow.yaml" # the argo workflow file relative to the repo's root.
-          PARAMETER_FILE_PATH: "argo/params.yaml" # optional parameter file.
+          WORKFLOW_YAML_PATH: "argo/workflow.yml" # the argo workflow file relative to the repo's root.
+          PARAMETER_FILE_PATH: "argo/params.yml" # optional parameter file.
           SHA: ${{ steps.label.outputs.HEAD_SHA }}
 
       - name: Create Check
         if: steps.label.outputs.TRIGGERED == 'true'
         run: |
-          python3 action_files/create_check_run.py "in_progress" "Argo-Workflow" "ML Workflow For SHA $SHA" "Links [Argo Workflow]($ARGO_LINK) | [W&B Project](https://app.wandb.ai/$WANDB_ENTITY/$WANDB_PROJECT) | Docker: [hamelsmu/ml-cicd](https://cloud.docker.com/u/hamelsmu/repository/docker/hamelsmu/ml-cicd), [hamelsmu/ml-cicd-gpu](https://cloud.docker.com/u/hamelsmu/repository/docker/hamelsmu/ml-cicd-gpu)" " "
+          python3 gha/create_check_run.py "in_progress" "Argo-Workflow" "ML Workflow For SHA $SHA" "Links [Argo Workflow]($ARGO_LINK) | [W&B Project](https://app.wandb.ai/$WANDB_ENTITY/$WANDB_PROJECT) | Docker: [hamelsmu/ml-cicd](https://cloud.docker.com/u/hamelsmu/repository/docker/hamelsmu/ml-cicd), [hamelsmu/ml-cicd-gpu](https://cloud.docker.com/u/hamelsmu/repository/docker/hamelsmu/ml-cicd-gpu)" " "
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ARGO_LINK: ${{ steps.argo.outputs.WORKFLOW_URL }}
@@ -86,7 +70,7 @@ jobs:
       - name: Comment With Metadata
         if: steps.label.outputs.TRIGGERED == 'true'
         run: |
-          bash action_files/pr_comment.sh "### [ML Workflow]($ARGO_LINK) For SHA $SHA has been instantiated.\n\nThe following Docker images were built and tagged with the SHA: \n - [hamelsmu/ml-cicd](https://cloud.docker.com/u/hamelsmu/repository/docker/hamelsmu/ml-cicd)\n - [hamelsmu/ml-cicd-gpu](https://cloud.docker.com/u/hamelsmu/repository/docker/hamelsmu/ml-cicd-gpu)\n\nCheck run \`Argo-Workflow\` created, with status pending completion of the workflow."
+          bash gha/pr_comment.sh "### [ML Workflow]($ARGO_LINK) For SHA $SHA has been instantiated.\n\nThe following Docker images were built and tagged with the SHA: \n - [hamelsmu/ml-cicd](https://cloud.docker.com/u/hamelsmu/repository/docker/hamelsmu/ml-cicd)\n - [hamelsmu/ml-cicd-gpu](https://cloud.docker.com/u/hamelsmu/repository/docker/hamelsmu/ml-cicd-gpu)\n\nCheck run \`Argo-Workflow\` created, with status pending completion of the workflow."
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ARGO_LINK: ${{ steps.argo.outputs.WORKFLOW_URL }}
