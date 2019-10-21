@@ -39,7 +39,8 @@ RUN pip3 install pipenv
 RUN mkdir /app
 WORKDIR /app
 
-# Copying Pipfile.lock
+# Copying Pipfile & Pipfile.lock
+COPY Pipfile Pipfile
 COPY Pipfile.lock Pipfile.lock
 
 # Install Dependencies
