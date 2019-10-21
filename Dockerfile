@@ -35,11 +35,12 @@ ENV LANG=C.UTF-8
 # Install Pip3 Pipenv
 RUN pip3 install pipenv
 
-# Create a working directory
+# Create a `app` Working Directory
 RUN mkdir /app
 WORKDIR /app
 
-# Copying Pipfile.lock
+# Copying Pipfile & Pipfile.lock
+COPY Pipfile Pipfile
 COPY Pipfile.lock Pipfile.lock
 
 # Install Dependencies
