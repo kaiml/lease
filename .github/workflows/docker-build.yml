@@ -15,9 +15,8 @@ jobs:
           cd $GITHUB_WORKSPACE
           echo ${PASSWORD} | docker login -u $USERNAME --password-stdin
           BASE_NAME="kaiml/lease"
-          IMAGE_NAME="$BASE_NAME:latest"
-          docker pull $IMAGE_NAME || true
-          docker build --cache-from $IMAGE_NAME -t $BASE_NAME -f Dockerfile .
+          docker pull $BASE_NAME || true
+          docker build --cache-from $BASE_NAME -t $BASE_NAME -f Dockerfile .
         env:
           USERNAME: ${{ secrets.DOCKER_USERNAME }}
           PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
