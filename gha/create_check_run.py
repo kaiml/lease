@@ -1,6 +1,7 @@
-import os
-import requests
 import argparse
+import os
+
+import requests
 
 token = os.getenv("GITHUB_TOKEN")
 location = os.getenv("GITHUB_REPOSITORY")

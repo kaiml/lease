@@ -22,7 +22,7 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE
           echo ${PASSWORD} | docker login -u $USERNAME --password-stdin
-          BASE_NAME="$USERNAME/lease"
+          BASE_NAME="kaiml/lease"
           IMAGE_NAME="$BASE_NAME:$GITHUB_SHA"
           docker pull $BASE_NAME || true
           docker build --cache-from $BASE_NAME -t $IMAGE_NAME -t $BASE_NAME -f Dockerfile .
@@ -52,8 +52,8 @@ jobs:
           PROJECT_ID: "kaiml-argo"
           LOCATION_ZONE: "asia-northeast1-a"
           CLUSTER_NAME: "kaiml-argo"
-          WORKFLOW_YAML_PATH: "argo/workflow.yml" # the argo workflow file relative to the repo's root.
-          PARAMETER_FILE_PATH: "argo/params.yml" # optional parameter file.
+          WORKFLOW_YAML_PATH: "argo/workflow.yml"
+          PARAMETER_FILE_PATH: "argo/params.yml"
           SHA: ${{ steps.label.outputs.HEAD_SHA }}
 
       - name: Create Check
