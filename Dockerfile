@@ -35,7 +35,7 @@ ENV LANG=C.UTF-8
 # Install Pip3 Pipenv
 RUN pip3 install pipenv
 
-# Create a working directory
+# Create a `app` Working Directory
 RUN mkdir /app
 WORKDIR /app
 
