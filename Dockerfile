@@ -2,6 +2,7 @@
 # https://github.com/anibali/docker-pytorch/blob/master/cuda-10.0/Dockerfile
 # https://github.com/pypa/pipenv/blob/master/Dockerfile
 
+# Base Image CUDA
 FROM nvidia/cuda:10.0-base-ubuntu18.04
 
 # Install Basic Utilities
