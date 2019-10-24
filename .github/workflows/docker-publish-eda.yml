@@ -4,7 +4,7 @@ on:
     branches:
       - master
     paths:
-      - "Dockerfile"
+      - "eda.Dockerfile"
       - "Pipfile"
       - "Pipfile.lock"
 jobs:
