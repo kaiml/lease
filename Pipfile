@@ -5,6 +5,7 @@ verify_ssl = true
 
 [dev-packages]
 black = "==19.3b0"
+conttest = "*"
 dvc = {extras = ["gs"],version = "*"}
 flake8 = "*"
 invoke = "*"
@@ -17,12 +18,18 @@ tox = "*"
 
 [packages]
 ipython = "*"
+jupyter = "*"
+jupyterthemes = "*"
+jupyter-contrib-nbextensions = "*"
+jupyter-nbextensions-configurator = "*"
 matplotlib = "*"
 numpy = "*"
 pandas = "*"
 scikit-learn = "*"
 seaborn = "*"
 tqdm = "*"
+plotly = "*"
+lightgbm = "*"
 
 [pipenv]
 allow_prereleases = true
