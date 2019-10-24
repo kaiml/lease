@@ -1,10 +1,10 @@
-version: '3.4'
+version: "3.4"
 services:
   lease:
     build: .
-    image: kaiml/lease:latest
+    image: kaiml/lease-eda
     ports:
-    - "8888:8888"
+      - "8888:8888"
     volumes:
-    -  .:/app
+      - .:/app
     command: pipenv run jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
