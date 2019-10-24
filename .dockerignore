@@ -98,3 +98,15 @@ venv/
 .mypy_cache/
 dist/
 __pycache__/
+
+.dvc
+.github
+.vscode
+*/Dockerfile
+*/docker-compose.yml
+*/nb-format.py
+*/main.py
+*/README.md
+*/setup.cfg
+*/tasks.py
+*/tox.ini
