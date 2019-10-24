@@ -2,7 +2,7 @@ name: Build Docker EDA Image
 on:
   push:
     paths:
-      - "Dockerfile"
+      - "eda.Dockerfile"
       - "Pipfile"
       - "Pipfile.lock"
 jobs:

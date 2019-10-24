@@ -44,7 +44,7 @@ COPY Pipfile Pipfile
 COPY Pipfile.lock Pipfile.lock
 
 # Install Dependencies
-RUN set -ex && pipenv sync --dev
+RUN set -ex && pipenv install --dev --system --ignore-pipfile --deploy
 
 # Install Jupyter Notebook Extensions
 RUN pipenv run jupyter contrib nbextension install --user \
