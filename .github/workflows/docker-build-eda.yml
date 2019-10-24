@@ -1,4 +1,4 @@
-name: Build EDA Docker Image
+name: Build Docker EDA Image
 on:
   push:
     paths:
