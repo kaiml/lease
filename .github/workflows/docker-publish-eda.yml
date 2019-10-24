@@ -1,4 +1,4 @@
-name: Publish Image to DockerHub
+name: Publish EDA Image to DockerHub
 on:
   push:
     branches:
