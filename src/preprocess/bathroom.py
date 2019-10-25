@@ -1,5 +1,6 @@
 import pandas as pd
 
+
 # bathroom: One-Hot Encoding
 def pp_bathroom(df):
     bathroom = df["bathroom"]
