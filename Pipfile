@@ -30,6 +30,7 @@ seaborn = "*"
 tqdm = "*"
 plotly = "*"
 lightgbm = "*"
+xgboost = "*"
 
 [pipenv]
 allow_prereleases = true
