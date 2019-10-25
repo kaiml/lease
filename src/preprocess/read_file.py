@@ -26,6 +26,4 @@ def read_file(INPUT_FILE_PATH="./../../input"):
     train_df = pd.read_csv(f"{INPUT_FILE_PATH}/train.csv").rename(columns=col_names)
     test_df = pd.read_csv(f"{INPUT_FILE_PATH}/test.csv").rename(columns=col_names)
 
-    # Combine train and test dataframes
-    df = pd.concat([train_df, test_df], axis=0, sort=True)
-    return df
+    return train_df, test_df
