@@ -6,4 +6,4 @@ services:
       - "8888:8888"
     volumes:
       - .:/app
-    command: pipenv run jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
+    command: jupyter notebook --ip 0.0.0.0 --no-browser --allow-root
