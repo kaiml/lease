@@ -19,4 +19,4 @@ jobs:
           pipenv sync --dev
       - name: Run test with Tox
         run: |
-          pipenv run tox -p libs flake8 mypy format
+          pipenv run tox -e libs flake8 mypy format
