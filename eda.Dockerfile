@@ -12,6 +12,7 @@ RUN apt-get update \
     sudo \
     git \
     bzip2 \
+    unzip \
     libx11-6 \
     libffi-dev \
     software-properties-common \
@@ -45,6 +46,13 @@ COPY Pipfile.lock Pipfile.lock
 
 # Install Dependencies
 RUN set -ex && pipenv install --dev --system --ignore-pipfile --deploy
+
+# japanize matplotlib
+RUN curl -L  "https://oscdl.ipa.go.jp/IPAexfont/ipaexg00301.zip" > font.zip \
+  && unzip font.zip \
+  && cp ipaexg00301/ipaexg.ttf /opt/conda/lib/python3.6/site-packages/matplotlib/mpl-data/fonts/ttf/ipaexg.ttf \
+  && echo "font.family : IPAexGothic" >>  /opt/conda/lib/python3.6/site-packages/matplotlib/mpl-data/matplotlibrc \
+  && rm -r ./.cache
 
 # Install Jupyter Notebook Extensions
 RUN jupyter contrib nbextension install --user \
