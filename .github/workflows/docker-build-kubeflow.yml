@@ -1,4 +1,4 @@
-name: Build Docker EDA Image
+name: Build Docker Kubeflow Image
 on:
   push:
     paths:
