@@ -31,6 +31,10 @@ tqdm = "*"
 plotly = "*"
 lightgbm = "*"
 xgboost = "*"
+contextlib2 = "*"
+category-encoders = "*"
+japanize-matplotlib = "*"
+mljar-supervised = "*"
 
 [pipenv]
 allow_prereleases = true

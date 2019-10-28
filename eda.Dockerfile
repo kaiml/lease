@@ -12,6 +12,7 @@ RUN apt-get update \
     sudo \
     git \
     bzip2 \
+    unzip \
     libx11-6 \
     libffi-dev \
     software-properties-common \

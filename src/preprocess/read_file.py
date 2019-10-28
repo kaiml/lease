@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-def read_file(INPUT_FILE_PATH="./../../input"):
+def read_file(DATA_DIR="./../../input"):
 
     col_names = {
         "アクセス": "access",
@@ -23,7 +23,7 @@ def read_file(INPUT_FILE_PATH="./../../input"):
     }
 
     # Read files
-    train_df = pd.read_csv(f"{INPUT_FILE_PATH}/train.csv").rename(columns=col_names)
-    test_df = pd.read_csv(f"{INPUT_FILE_PATH}/test.csv").rename(columns=col_names)
+    train_df = pd.read_csv(f"{DATA_DIR}/train.csv").rename(columns=col_names)
+    test_df = pd.read_csv(f"{DATA_DIR}/test.csv").rename(columns=col_names)
 
     return train_df, test_df
