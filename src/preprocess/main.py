@@ -1,3 +1,5 @@
+from src.preprocess.access import pp_access
+from src.preprocess.address import pp_address
 from src.preprocess.age import pp_age
 from src.preprocess.area import pp_area
 from src.preprocess.bathroom import pp_bathroom
@@ -12,6 +14,8 @@ from src.preprocess.parking import pp_parking
 def pp(df):
     df = pp_age(df)
     df = pp_area(df)
+    df = pp_access(df)
+    df = pp_address(df)
     df = pp_bathroom(df)
     df = pp_contract(df)
     df = pp_equipment(df)
