@@ -34,8 +34,6 @@ xgboost = "*"
 contextlib2 = "*"
 category-encoders = "*"
 japanize-matplotlib = "*"
-mljar-supervised = "*"
-auto-sklearn = "*"
 
 [pipenv]
 allow_prereleases = true
