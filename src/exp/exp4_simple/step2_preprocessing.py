@@ -11,7 +11,7 @@ sys.path.insert(0, PROJECT_DIR)
 from src.preprocess.main import pp  # isort:skip # noqa: E402
 
 
-def step3_preprocessing(df):
+def preprocessing(df):
     df = pp(df)
 
     # fill NaN with most frequent values

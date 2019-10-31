@@ -1,18 +1,14 @@
 import numpy as np
 import pandas as pd
+from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import StratifiedKFold
 
+import lightgbm as lgb
 import xgboost as xgb
 
 
-def step4_cv(train_df):
-    # xgb parameters
-    params = {
-        # 回帰問題
-        "objective": "reg:squarederror",
-        # 学習用の指標 (RMSE)
-        "eval_metric": "rmse",
-    }
+def cross_validation(train_df, model_name="linearRegression", params=None):
+    print("----------------", model_name, "----------------")
     result = pd.DataFrame()
     scores = []
     y = train_df["target"].values
@@ -23,18 +19,50 @@ def step4_cv(train_df):
         y_train = y[train_index]
         y_val = y[val_index]
 
-        dtrain = xgb.DMatrix(train.drop(["target"], axis=1), label=y_train.flatten())
-        dtest = xgb.DMatrix(val.drop(["target"], axis=1), label=y_val.flatten())
+        if model_name == "linearRegression":
+            model = LinearRegression()
+            model.fit(train.drop(["target"], axis=1), np.log(y_train))
+            y_pred = np.exp(model.predict(val.drop(["target"], axis=1)))
 
-        gbm = xgb.train(params, dtrain, num_boost_round=100)  # 学習ラウンド数は適当
+        if model_name == "lightgbm":
+            lgb_train = lgb.Dataset(
+                train.drop(["target"], axis=1),
+                y_train.flatten(),
+                params={"verbose": -1},
+            )
+            lgb_eval = lgb.Dataset(
+                val.drop(["target"], axis=1),
+                y_val.flatten(),
+                reference=lgb_train,
+                params={"verbose": -1},
+            )
 
-        y_pred = gbm.predict(dtest)
+            gbm = lgb.train(
+                params,
+                lgb_train,
+                num_boost_round=100,
+                valid_sets=lgb_eval,
+                early_stopping_rounds=10,
+                verbose_eval=False,
+            )
+
+            y_pred = gbm.predict(
+                val.drop(["target"], axis=1), num_iteration=gbm.best_iteration
+            )
+
+        if model_name == "xgboost":
+            dtrain = xgb.DMatrix(
+                train.drop(["target"], axis=1), label=y_train.flatten()
+            )
+            dtest = xgb.DMatrix(val.drop(["target"], axis=1), label=y_val.flatten())
+            gbm = xgb.train(params, dtrain, num_boost_round=100)  # 学習ラウンド数は適当
+            y_pred = gbm.predict(dtest)
 
         score = np.sqrt(
             ((y_pred.flatten() - y_val.flatten()) ** 2).sum() / len(y_val.flatten())
         )
         scores.append(score)
-        print("No.{} Score: {}".format(n_fold, score))
+        print("n_fold: {} Score: {}".format(n_fold, score))
 
         result = pd.concat(
             [
@@ -51,4 +79,6 @@ def step4_cv(train_df):
             ]
         )
 
+    print("----------------", model_name, " END ----------------")
+    print()
     return result, scores
