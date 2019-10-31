@@ -1,6 +1,6 @@
 name: Build Docker Image
 on:
-  push:
+  pull_request:
     paths:
       - "Dockerfile"
       - "Pipfile"
