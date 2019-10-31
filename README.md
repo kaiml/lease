@@ -7,7 +7,7 @@
 Make sure that the port 8888 of your local computer is open.
 
 ```bash
-docker-compose up --build
+docker-compose pull && docker-compose up --build
 ```
 
 ### OPTIONAL: Build from local Dockerfile
