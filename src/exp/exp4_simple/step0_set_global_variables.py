@@ -14,7 +14,7 @@ from src.logger.main import LOGGER, setup_logger  # isort:skip # noqa: E402
 # settings
 EXP_ID = "exp4"
 DATA_DIR = "../../input"
-SEED = 42
+SEED = 43
 ID_COLUMNS = "id"
 TARGET_COLUMNS = ["target"]
 N_CLASSES = len(TARGET_COLUMNS)
