@@ -3,7 +3,7 @@
 # https://github.com/pypa/pipenv/blob/master/Dockerfile
 
 # Install from Base Lease Image
-FROM kaiml/lease
+FROM kaiml/lease:latest
 
 # Install Jupyter Notebook Extensions
 RUN jupyter contrib nbextension install --user \
@@ -16,14 +16,6 @@ RUN jupyter nbextension install https://github.com/drillan/jupyter-black/archive
 # Install Jupyter Isort
 RUN jupyter nbextension install https://github.com/benjaminabel/jupyter-isort/archive/master.zip --user \
     && jupyter nbextension enable jupyter-isort-master/jupyter-isort
-
-# # Install Jupyter Vim
-RUN mkdir -p $(jupyter --data-dir)/nbextensions \
-    && cd $(jupyter --data-dir)/nbextensions \ 
-    && git clone https://github.com/lambdalisue/jupyter-vim-binding vim_binding \
-    && chmod -R go-w vim_binding 
-RUN jupyter nbextension enable vim_binding/vim_binding
-
 
 ## Enable Nbextensions (Reference URL: https://qiita.com/simonritchie/items/88161c806197a0b84174)
 
@@ -50,6 +42,20 @@ RUN jupyter nbextension enable codefolding/main
 
 # Notify
 RUN jupyter nbextension enable notify/notify
+
+# Install Jupyter Vim
+ARG data_dir="$(jupyter --data-dir)/nbextensions"
+
+RUN mkdir -p data_dir
+
+WORKDIR ${data_dir}
+
+RUN git clone https://github.com/lambdalisue/jupyter-vim-binding vim_binding \
+    && chmod -R go-w vim_binding 
+
+RUN jupyter nbextension enable vim_binding/vim_binding
+
+WORKDIR /app
 
 # Change Theme
 RUN jt -t chesterish -T -f roboto -fs 9 -tf merriserif -tfs 11 -nf ptsans -nfs 11 -dfs 8 -ofs 8 \
