@@ -3,7 +3,7 @@
 # https://github.com/pypa/pipenv/blob/master/Dockerfile
 
 # Base Image CUDA
-FROM nvidia/cuda:10.0-base-ubuntu18.04
+FROM nvidia/cuda:10.1-base-ubuntu18.04
 
 # Install Basic Utilities
 RUN apt-get update \
