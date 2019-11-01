@@ -32,14 +32,14 @@ def preprocessing(df):
     )
     df = pd.concat([df, pd.get_dummies(df["layout"], prefix="ohe_layout")], axis=1)
     df = pd.concat([df, pd.get_dummies(df["material"], prefix="ohe_material")], axis=1)
-    df = pd.concat(
-        [df, pd.get_dummies(df["address_1"], prefix="ohe_adddress1")], axis=1
-    )
+    df = pd.concat([df, pd.get_dummies(df["address_1"], prefix="ohe_address1")], axis=1)
 
     # Drop unused columns
     df = df.drop(
         [
             "id",
+            "age",
+            "age_month",
             "layout",
             "material",
             "direction",
