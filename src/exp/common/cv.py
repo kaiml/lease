@@ -1,9 +1,8 @@
+import lightgbm as lgb
 import numpy as np
 import pandas as pd
-from sklearn.linear_model import LinearRegression
-
-import lightgbm as lgb
 import xgboost as xgb
+from sklearn.linear_model import LinearRegression
 
 
 def cv(cv_df=pd.DataFrame(), model_name="linearRegression", params={}):
