@@ -12,7 +12,7 @@ from src.logger.main import LOGGER, setup_logger  # isort:skip # noqa: E402
 
 # settings
 DATA_DIR = "../../input"
-SEED = 43
+SEED = 42
 ID_COLUMNS = "id"
 TARGET_COLUMNS = ["target"]
 N_CLASSES = len(TARGET_COLUMNS)

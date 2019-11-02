@@ -13,7 +13,9 @@ def plot_result(df, result, n_fold, model_name):
     )
     text += "real: " + r["real"].astype(str).reset_index()["real"] + "<br>"
     text += (
-        df.loc[r["index"]][["area", "address", "layout", "age", "floor_stories", "material"]]
+        df.loc[r["index"]][
+            ["area", "address", "layout", "age", "floor_stories", "material"]
+        ]
         .astype(str)
         .apply(lambda row: "<br>".join(row), axis=1)
         .reset_index()[0]

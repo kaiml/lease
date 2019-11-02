@@ -28,4 +28,5 @@ def pp_address(df):
     df.loc[:, "address_1"] = address_1
     df.loc[:, "address_2"] = address_2
     df.loc[:, "address_3"] = address_3
+    df.loc[:, "address_1_2"] = address_1 + "区" + address_2
     return df
