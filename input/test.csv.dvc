@@ -1,8 +1,0 @@
-md5: 02f820253ebde6205085e49ef50f0acb
-outs:
-- md5: 42c52c5d4ab83a54e08310bbe4d9e0f6
-  path: test.csv
-  cache: true
-  metric: false
-  persist: false
-locked: true
