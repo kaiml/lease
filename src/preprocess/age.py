@@ -13,7 +13,9 @@ def pp_age(df):
         .astype(int)
     )
 
-    df.loc[:, "age"] = year + month / 12
+    df.loc[:, "age_year"] = year
+    df.loc[:, "age_month"] = month
 
-    df.loc[df["age"] > 70, "age"] = 70
+    df.loc[df["age_year"] > 70, "age_year"] = 70
+    df.loc[df["age_year"] > 70, "age_month"] = 0
     return df
