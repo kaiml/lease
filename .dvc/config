@@ -1,4 +1,0 @@
-['remote "origin"']
-url = gs://kaiml-dvc-lease
-[core]
-remote = origin
