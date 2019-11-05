@@ -11,7 +11,6 @@ def drop_unused_columns(df):
             "neighbor",
             "line_1",
             "station_1",
-            "duration_1",
             "line_2",
             "station_2",
             "duration_2",
@@ -24,6 +23,7 @@ def drop_unused_columns(df):
             "address_2",
             "address_3",
             "address_1_2",
+            "building",
         ],
         axis=1,
     )

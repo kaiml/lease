@@ -24,6 +24,8 @@ def pp(df):
     df = pp_kitchen(df)
     df = pp_parking(df)
 
+    df["building"] = df["stories"].astype(str) + "階" + df["address_1_2"] + df["age"]
+
     # drop unused columns
     df = df.drop(
         [
