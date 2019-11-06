@@ -20,11 +20,7 @@ def train_and_predict(
 
     if model_name == "lightgbm":
         lgb_train = lgb.Dataset(train_x, train_y, params={"verbose": -1})
-        model = lgb.train(
-            params,
-            lgb_train,
-            verbose_eval=False,
-        )
+        model = lgb.train(params, lgb_train, verbose_eval=False)
         y_pred = model.predict(val_x, num_iteration=model.best_iteration)
 
     if model_name == "xgboost":

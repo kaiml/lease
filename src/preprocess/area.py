@@ -5,5 +5,5 @@ def pp_area(df):
     area = area.astype(float)
 
     df.loc[:, "area"] = area
-    # df.loc[df.area > 200, "area"] = 200
+    df.loc[df.area > 200, "area"] = 200
     return df

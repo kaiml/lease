@@ -8,6 +8,7 @@ from src.preprocess.equipment import pp_equipment
 from src.preprocess.floor_stories import pp_floor_stories
 from src.preprocess.internet import pp_internet
 from src.preprocess.kitchen import pp_kitchen
+from src.preprocess.layout import pp_layout
 from src.preprocess.parking import pp_parking
 
 
@@ -22,6 +23,7 @@ def pp(df):
     df = pp_floor_stories(df)
     df = pp_internet(df)
     df = pp_kitchen(df)
+    df = pp_layout(df)
     df = pp_parking(df)
 
     df["building"] = df["stories"].astype(str) + "階" + df["address_1_2"] + df["age"]
