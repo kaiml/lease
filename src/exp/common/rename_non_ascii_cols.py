@@ -6,4 +6,5 @@ def rename_non_ascii_cols(df):
         rename_cols[col_name] = "_".join(col_name.split("_")[:2]) + "_{}".format(i)
         i += 1
     df = df.rename(columns=rename_cols)
-    return df
+    rename_cols_revert = {v: k for k, v in rename_cols.items()}
+    return df, rename_cols_revert

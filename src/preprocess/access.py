@@ -101,4 +101,27 @@ def pp_access(df):
     df.loc[:, "duration_3"] = duration_3
     df.loc[:, "is_bus_3"] = is_bus_3
 
+    df["duration_1_1min"] = (df["duration_1"] <= 1).astype(int)
+    df["duration_1_3min"] = ((1 < df["duration_1"]) & (df["duration_1"] <= 3)).astype(
+        int
+    )
+    df["duration_1_5min"] = ((3 < df["duration_1"]) & (df["duration_1"] <= 5)).astype(
+        int
+    )
+    df["duration_1_7min"] = ((5 < df["duration_1"]) & (df["duration_1"] <= 7)).astype(
+        int
+    )
+    df["duration_1_10min"] = ((7 < df["duration_1"]) & (df["duration_1"] <= 10)).astype(
+        int
+    )
+    df["duration_1_15min"] = (
+        (10 < df["duration_1"]) & (df["duration_1"] <= 15)
+    ).astype(int)
+    df["duration_1_20min"] = (
+        (15 < df["duration_1"]) & (df["duration_1"] <= 20)
+    ).astype(int)
+    df["duration_1_more_than_20min"] = (20 < df["duration_1"]).astype(int)
+
+    df.loc[:, "station_2"] = df["station_2"].fillna(df["station_1"])
+
     return df
