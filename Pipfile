@@ -35,6 +35,7 @@ contextlib2 = "*"
 category-encoders = "*"
 japanize-matplotlib = "*"
 beautifulsoup4 = "*"
+requests = "*"
 
 [pipenv]
 allow_prereleases = true
