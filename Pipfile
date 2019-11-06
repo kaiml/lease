@@ -34,6 +34,7 @@ xgboost = "*"
 contextlib2 = "*"
 category-encoders = "*"
 japanize-matplotlib = "*"
+requests = "*"
 
 [pipenv]
 allow_prereleases = true
