@@ -108,3 +108,5 @@ venv.bak/
 
 *_log.txt
 log.txt
+
+.DS_Store
